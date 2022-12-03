@@ -46,3 +46,44 @@ export async function saveUser(data) {
         throw response;
     }
 }
+
+export async function editUser(userData, id) {
+    const editPath = URL + "users/" + id;
+    const modifiedFields = {
+        first_name: userData.get("first-name"),
+        last_name: userData.get("last-name"),
+    };
+
+    const response = await fetch(editPath, {
+        method: "PUT",
+        body: JSON.stringify(modifiedFields),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (response.status === 422) {
+        const validationErrors = await response.json();
+        return validationErrors;
+    }
+
+    if (!response.ok) {
+        throw response;
+    }
+}
+
+export async function changeUserStatus(status, id) {
+    const editPath = URL + "users/" + id;
+
+    const response = await fetch(editPath, {
+        method: "PUT",
+        body: JSON.stringify({ status: status }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (response.ok) {
+        return response.ok;
+    }
+}

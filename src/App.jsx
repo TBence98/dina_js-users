@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { loader as usersLoader } from "./components/UsersList";
 import { action as newUserAction } from "./pages/NewUser";
+import { action as editUserAction } from "./pages/EditUser";
 
 import Users from "./pages/Users";
 import RootLayout from "./pages/rootLayout";
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
             <Route
                 path="/users/:id"
                 element={<EditUser />}
+                action={editUserAction}
             />
             <Route
                 path="/users/new"
