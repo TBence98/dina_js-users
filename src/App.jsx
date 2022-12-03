@@ -6,6 +6,7 @@ import {
     Navigate,
 } from "react-router-dom";
 import { loader as usersLoader } from "./components/UsersList";
+import { action as newUserAction } from "./pages/NewUser";
 
 import Users from "./pages/Users";
 import RootLayout from "./pages/rootLayout";
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
             <Route
                 path="/users/new"
                 element={<NewUser />}
+                action={newUserAction}
             />
             <Route path="/*" element={<h2>Page not found!</h2>} />
         </Route>

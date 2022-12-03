@@ -20,3 +20,29 @@ export async function getUsers() {
         throw new Response("Failed to fetch users", { status: 404 });
     }
 }
+
+export async function saveUser(data) {
+    const newPath = URL + "users";
+    const newUser = {
+        first_name: data.get("first-name"),
+        last_name: data.get("last-name"),
+        status: "active",
+    };
+
+    const response = await fetch(newPath, {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (response.status === 422) {
+        const validationErrors = await response.json();
+        return validationErrors;
+    }
+
+    if (!response.ok) {
+        throw response;
+    }
+}
