@@ -1,4 +1,6 @@
-const Pagination = ({ totalUsers, usersPerPage, changePage }) => {
+import classes from "./Pagination.module.css";
+
+const Pagination = ({ totalUsers, usersPerPage, changePage, currentPage }) => {
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) {
@@ -12,14 +14,17 @@ const Pagination = ({ totalUsers, usersPerPage, changePage }) => {
 
     return (
         <nav>
-            <ul>
-                {pageNumbers.map((number) => (
-                    <li key={number}>
+            <ul className={classes.page_numbers_container}>
+                {pageNumbers.map((pageNumber) => (
+                    <li key={pageNumber} className={classes.page_number}>
                         <a
                             href=""
-                            onClick={(e) => changePageHandler(e, number)}
+                            onClick={(e) => changePageHandler(e, pageNumber)}
+                            className={
+                                pageNumber === currentPage ? classes.active : ""
+                            }
                         >
-                            {number}
+                            {pageNumber}
                         </a>
                     </li>
                 ))}

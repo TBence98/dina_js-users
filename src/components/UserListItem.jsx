@@ -1,51 +1,50 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Modal from "./UI/Modal";
-import { changeUserStatus } from "../util/api";
-import classes from "./UserListItem.module.css"
+import { formatDate } from "../util/formatDate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faPenToSquare,
+    faLock,
+    faLockOpen,
+    faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
-const UserListItem = ({ first_name, last_name, created_at, status, id }) => {
-    const [userStatus, setUserStatus] = useState(status);
-    const [modalMessage, setModalMessage] = useState(null);
+import classes from "./UserListItem.module.css";
 
-    const toggleStatus = async () => {
-        const newStatus = userStatus === "active" ? "locked" : "active";
-        try {
-            const response = await changeUserStatus(newStatus, id);
-            if (response) {
-                setUserStatus(newStatus);
-            }
-            setModalMessage(`${first_name} ${last_name} is now ${newStatus}`);
-        } catch (error) {
-            setModalMessage(error.message);
-        }
-    };
-
-    const closeModal = () => {
-        setModalMessage(null);
-    };
-
+const UserListItem = ({
+    first_name,
+    last_name,
+    created_at,
+    userStatus,
+    id,
+    toggleStatus,
+}) => {
     return (
-        <>
-            {modalMessage ? (
-                    <Modal onClose={closeModal}>
-                        <p style={{ color: "black" }}>{modalMessage}</p>
-                        <button type="button" onClick={closeModal}>
-                            OK
-                        </button>
-                    </Modal>
-                ) : null}
-            <li className={`${classes.user} ${
-                    userStatus === "locked" ? classes.user_disabled : ""
-                }`}>
+        <li
+            className={`${classes.user} ${
+                userStatus === "locked" ? classes.user_disabled : ""
+            }`}
+        >
+            <FontAwesomeIcon icon={faUser} className={classes.user_icon} />
+            <div className={classes.user_infos}>
                 <p>{first_name}</p>
                 <p>{last_name}</p>
-                <p>{created_at}</p>
-                <Link to={`/users/${id}`}>Edit User</Link>
-                <button type="button" onClick={toggleStatus}>{userStatus === "active" ? "Disable" : "Activate"}</button>
-            </li>
-        </>
-    )
-}
+                <p>{userStatus}</p>
+                <p>{formatDate(new Date(created_at))}</p>
+            </div>
+            <div className={classes.user_actions}>
+                <button type="button" onClick={() => toggleStatus(id)}>
+                    {userStatus === "active" ? (
+                        <FontAwesomeIcon icon={faLock} />
+                    ) : (
+                        <FontAwesomeIcon icon={faLockOpen} />
+                    )}
+                </button>
+                <Link to={`/users/${id}`}>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
+            </div>
+        </li>
+    );
+};
 
 export default UserListItem;

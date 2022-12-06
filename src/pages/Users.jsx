@@ -4,12 +4,7 @@ import UsersList from "../components/UsersList";
 
 const Users = () => {
     const loaderData = useLoaderData();
-    return (
-        <>
-            <h1>The Users List</h1>
-            <UsersList users={loaderData} />
-        </>
-    );
+    return <UsersList loadedUsers={loaderData} />;
 };
 
 export default Users;

@@ -1,27 +1,37 @@
+import { useState, useEffect } from "react";
 import { useParams, redirect, useActionData } from "react-router-dom";
 import UserForm from "../components/UserForm";
 import { editUser } from "../util/api";
 
 const EditUser = () => {
     const params = useParams();
-    const data = useActionData();
-    let firstNameError = null;
-    let lastNameError = null;
+    const errors = useActionData();
+    const [firstNameError, setFirstNameError] = useState(null);
+    const [lastNameError, setLastNameError] = useState(null);
 
-    if (data) {
-        firstNameError = data.first_name ? data.first_name[0] : null;
-        lastNameError = data.last_name ? data.last_name[0] : null;
-    }
+    useEffect(() => {
+        if (errors) {
+            setFirstNameError(errors.first_name ? errors.first_name[0] : null);
+            setLastNameError(errors.last_name ? errors.last_name[0] : null);
+        }
+    }, [errors]);
+
+    const removeError = (event) => {
+        if (firstNameError && event.target.id === "first-name") {
+            setFirstNameError(null);
+        }
+        if (lastNameError && event.target.id === "last-name") {
+            setLastNameError(null);
+        }
+    };
 
     return (
-        <>
-            <h1>Edit user</h1>
-            <UserForm
-                editId={params.id}
-                firstNameError={firstNameError}
-                lastNameError={lastNameError}
-            />
-        </>
+        <UserForm
+            editId={params.id}
+            firstNameError={firstNameError}
+            lastNameError={lastNameError}
+            removeError={removeError}
+        />
     );
 };
 

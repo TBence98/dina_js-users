@@ -1,3 +1,52 @@
-.user_disabled p {
+.user {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: solid 1px rgb(196, 194, 194);
+}
+
+.user_icon {
+    font-size: 5rem;
+    border: solid 2px #8b8b8b;
+    padding: 1rem;
+    color: #2196f3;
+}
+
+.user_infos {
+    font-weight: bold;
+}
+
+.user_actions button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 1.7rem;
+}
+
+.user_actions a {
+    display: block;
+    margin-top: 1rem;
+    color: #2196f3;
+    font-size: 1.7rem;
+}
+
+.user_disabled .user_infos {
     text-decoration: line-through;
+}
+
+@media screen and (max-width: 450px) {
+    .user {
+        flex-flow: column;
+        margin-bottom: 1rem;
+    }
+
+    .user_actions {
+        margin: 0.8rem;
+    }
+
+    .user_actions a {
+        display: inline-block;
+        margin: 0 0 0 3rem;
+    }
 }

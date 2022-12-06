@@ -1,26 +1,36 @@
+import { useState, useEffect } from "react";
 import { redirect, useActionData } from "react-router-dom";
 
 import UserForm from "../components/UserForm";
 import { saveUser } from "../util/api";
 
 const NewUser = () => {
-    const data = useActionData();
-    let firstNameError = null;
-    let lastNameError = null;
+    const errors = useActionData();
+    const [firstNameError, setFirstNameError] = useState(null);
+    const [lastNameError, setLastNameError] = useState(null);
 
-    if (data) {
-        firstNameError = data.first_name ? data.first_name[0] : null;
-        lastNameError = data.last_name ? data.last_name[0] : null;
-    }
+    useEffect(() => {
+        if (errors) {
+            setFirstNameError(errors.first_name ? errors.first_name[0] : null);
+            setLastNameError(errors.last_name ? errors.last_name[0] : null);
+        }
+    }, [errors]);
+
+    const removeError = (event) => {
+        if (firstNameError && event.target.id === "first-name") {
+            setFirstNameError(null);
+        }
+        if (lastNameError && event.target.id === "last-name") {
+            setLastNameError(null);
+        }
+    };
 
     return (
-        <>
-            <h1>Add new user</h1>
-            <UserForm
-                firstNameError={firstNameError}
-                lastNameError={lastNameError}
-            />
-        </>
+        <UserForm
+            firstNameError={firstNameError}
+            lastNameError={lastNameError}
+            removeError={removeError}
+        />
     );
 };
 

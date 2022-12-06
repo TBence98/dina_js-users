@@ -5,8 +5,7 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 
-  /* color: rgba(255, 255, 255, 0.87); */
-  background-color: #ffffff;
+  background-color: #f1f1f1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,7 +16,6 @@
 
 body {
   margin: 0;
-  text-align: center;
 }
 
 ul {
@@ -26,7 +24,8 @@ ul {
   padding: 0;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
 }
 

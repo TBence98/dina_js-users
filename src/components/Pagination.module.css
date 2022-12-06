@@ -1,0 +1,25 @@
+.page_numbers_container {
+    margin-top: 1rem;
+}
+
+.page_number {
+    display: inline-block;
+}
+
+.page_number a {
+    display: inline-block;
+    padding: 0.7rem;
+    background-color: #ffffff;
+    border: solid 1px #dedede;
+    text-decoration: none;
+    font-weight: bold;
+    color: #2969b5;
+}
+
+.page_number a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.page_number .active {
+    color: #999;
+}
