@@ -27,6 +27,9 @@ const NewUser = () => {
 
     return (
         <UserForm
+            actionRoute="/users/new"
+            title="Add New User"
+            buttonMessage="Create New User"
             firstNameError={firstNameError}
             lastNameError={lastNameError}
             removeError={removeError}

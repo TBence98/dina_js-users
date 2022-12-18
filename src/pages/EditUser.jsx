@@ -27,7 +27,9 @@ const EditUser = () => {
 
     return (
         <UserForm
-            editId={params.id}
+            actionRoute={`/users/${params.id}`}
+            title="Edit User"
+            buttonMessage="Edit User"
             firstNameError={firstNameError}
             lastNameError={lastNameError}
             removeError={removeError}

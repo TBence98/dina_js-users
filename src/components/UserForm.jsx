@@ -4,19 +4,20 @@ import Button from "./UI/Button";
 
 import classes from "./UserForm.module.css";
 
-//  If editId is there then we are editing else adding a new user
 const UserForm = ({
     firstNameError,
     lastNameError,
     removeError,
-    editId = false,
+    actionRoute,
+    title,
+    buttonMessage
 }) => {
     return (
         <Card className={classes.user_form}>
-            <h1>{editId ? "Edit User" : "Add New User"}</h1>
+            <h1>{title}</h1>
             <Form
                 method="post"
-                action={editId ? `/users/${editId}` : "/users/new"}
+                action={actionRoute}
             >
                 <label htmlFor="first-name">First Name </label>
                 {firstNameError ? (
@@ -40,7 +41,7 @@ const UserForm = ({
                     className={`${lastNameError ? classes.invalid_field : ""}`}
                     onChange={removeError}
                 />
-                <Button>{editId ? "Edit User" : "Create New User"}</Button>
+                <Button type="submit">{buttonMessage}</Button>
             </Form>
         </Card>
     );
