@@ -92,6 +92,7 @@ const UserList = ({ loadedUsers }) => {
                     usersPerPage={usersPerPage}
                     changePage={changePage}
                     currentPage={currentPage}
+                    maxVisiblePageLinks={20}
                 />
             </section>
         </>
