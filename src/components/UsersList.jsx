@@ -14,6 +14,7 @@ const UserList = ({ loadedUsers }) => {
     const [modalMessage, setModalMessage] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage, setUsersPerPage] = useState(10);
+    const { innerWidth } = window;
     /* const [searchParams, setSearchParams] = useSearchParams(); */
 
     // Get current page users
@@ -92,7 +93,7 @@ const UserList = ({ loadedUsers }) => {
                     usersPerPage={usersPerPage}
                     changePage={changePage}
                     currentPage={currentPage}
-                    maxVisiblePageLinks={9}
+                    maxVisiblePageLinks={innerWidth > 530 ? 9 : 5}
                 />
             </section>
         </>
