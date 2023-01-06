@@ -1,3 +1,7 @@
+.pagination_container {
+    text-align: center;
+}
+
 .page_numbers_container {
     margin-top: 1rem;
     display: inline-block;
@@ -9,18 +13,19 @@
 
 .page_link {
     display: inline-block;
-    padding: 0.7rem;
+    padding: 0.6rem 0;
     background-color: #ffffff;
     border: solid 1px #dedede;
     text-decoration: none;
     font-weight: bold;
     color: #2969b5;
+    min-width: 2.7rem;
 }
 
-.page_number a:hover {
+.page_link:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
 .active_link {
-    color: #999;
+    border: solid 2px #9fbde1;
 }

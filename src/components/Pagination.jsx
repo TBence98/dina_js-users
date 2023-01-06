@@ -83,7 +83,7 @@ const Pagination = ({ totalUsers, usersPerPage, changePage, currentPage, maxVisi
     }
 
     return (
-        <nav>
+        <nav className={classes.pagination_container}>
             {currentPage !== 1 ? <a href="" onClick={goToPreviousPage} className={classes.page_link}>{"<"}</a> : null}
             <ul className={classes.page_numbers_container}>
                 {pageNumbers.map((pageNumber) => (
