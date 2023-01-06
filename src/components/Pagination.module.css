@@ -1,12 +1,13 @@
 .page_numbers_container {
     margin-top: 1rem;
-}
-
-.page_number {
     display: inline-block;
 }
 
-.page_number a {
+.page_link_container {
+    display: inline-block;
+}
+
+.page_link {
     display: inline-block;
     padding: 0.7rem;
     background-color: #ffffff;
@@ -20,6 +21,6 @@
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.page_number .active {
+.active_link {
     color: #999;
 }

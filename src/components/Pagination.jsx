@@ -60,16 +60,39 @@ const Pagination = ({ totalUsers, usersPerPage, changePage, currentPage, maxVisi
         changePage(number);
     };
 
+    const goToPreviousPage = (event) => {
+        event.preventDefault();
+        if (currentPage === 1) {
+            throw new RangeError("The current page must be bigger than 1 when calling this function")
+        }
+        if (tresholdPageNum) {
+            setVisibleLinks(currentPage - 1);
+        }     
+        changePage(currentPage - 1);
+    }
+
+    const goToNextPage = (event) => {
+        event.preventDefault();
+        if (currentPage === lastPageNum) {
+            throw new RangeError("The current page must be less than the last page number when calling this function")
+        }
+        if (tresholdPageNum) {
+            setVisibleLinks(currentPage + 1);
+        }         
+        changePage(currentPage + 1);
+    }
+
     return (
         <nav>
+            {currentPage !== 1 ? <a href="" onClick={goToPreviousPage} className={classes.page_link}>{"<"}</a> : null}
             <ul className={classes.page_numbers_container}>
                 {pageNumbers.map((pageNumber) => (
-                    <li key={pageNumber} className={classes.page_number}>
+                    <li key={pageNumber} className={classes.page_link_container}>
                         <a
                             href=""
                             onClick={(e) => changePageHandler(e, pageNumber)}
                             className={
-                                pageNumber === currentPage ? classes.active : ""
+                                `${classes.page_link} ${pageNumber === currentPage ? classes.active_link : ""}`
                             }
                         >
                             {pageNumber}
@@ -77,6 +100,8 @@ const Pagination = ({ totalUsers, usersPerPage, changePage, currentPage, maxVisi
                     </li>
                 ))}
             </ul>
+            {currentPage !== lastPageNum ? <a href="" onClick={goToNextPage} className={classes.page_link}>{">"}</a> : null}
+            
         </nav>
     );
 };
