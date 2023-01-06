@@ -25,7 +25,7 @@ const Pagination = ({ totalUsers, usersPerPage, changePage, currentPage, maxVisi
                 const increment = selectedLink - tresholdPageNum;
                 // if the lastVisiblePageNum would be bigger with the added increment than the last possible page link
                 if (lastVisiblePageNum + increment > lastPageNum) {
-                    const newFirstVisiblePageLink = lastPageNum - maxVisiblePageLinks
+                    const newFirstVisiblePageLink = lastPageNum + 1 - maxVisiblePageLinks
                     setFirstVisiblePageNum(newFirstVisiblePageLink);
                     setLastVisiblePageNum(lastPageNum);
                     setTresholdPageNum(calcTresholdPoint(newFirstVisiblePageLink, lastPageNum));
